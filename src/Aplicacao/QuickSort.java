@@ -2,7 +2,7 @@ package Aplicacao;
 
 public class QuickSort {
 
-    void sort(int vetor[], int inicio, int fim) {
+    void sort(Produto vetor[], int inicio, int fim) {
         if (inicio < fim) {
             int pi = particiona(vetor, inicio, fim); //Calcula a posição do pivô
             //Chama o sort duas vezes
@@ -11,32 +11,30 @@ public class QuickSort {
         }
     }
 
-    int particiona(int vetor[], int inicio, int fim) {
-        int esq = inicio;
-        int dir = fim;
-        int pivo = vetor[inicio];
+    int particiona(Produto vetor[], int inicio, int fim) {
+        int esquerda = inicio;
+        int direita = fim;
+        Produto pivo = vetor[inicio]; //pivô é a posição de inicio do vetor
 
-        while (esq < dir) {
-            while (esq <= fim && vetor[esq] <= pivo) {
-                esq++;
+        while (esquerda < direita) {
+            while (esquerda <= fim && vetor[esquerda].getPreco() <= pivo.getPreco()) { //Enquanto o elemento for menor que o pivô
+                esquerda++; //Incrementa a posição
             }
 
-            while (dir >= 0 && vetor[dir] > pivo) {
-                dir--;
+            while (direita >= 0 && vetor[direita].getPreco() > pivo.getPreco()) { //Enquanto o elemento for maior que o pivô
+                direita--; //Decrementa a posição
             }
 
-            if (esq < dir) {
-                int aux = vetor[esq];
-                vetor[esq] = vetor[dir];
-                vetor[dir] = aux;
+            if (esquerda < direita) { //Se a posição da esquerda for menor que a da direita
+                Produto aux = vetor[esquerda]; //Troca os elementos
+                vetor[esquerda] = vetor[direita];
+                vetor[direita] = aux;
             }
         }
 
-        vetor[inicio] = vetor[dir];
-        vetor[dir] = pivo;
-        return dir;
+        vetor[inicio] = vetor[direita];
+        vetor[direita] = pivo;
+        return direita;
     }
 
 }
-
-
